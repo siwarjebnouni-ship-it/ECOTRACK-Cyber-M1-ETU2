@@ -1,0 +1,379 @@
+2026/05/14 12:53:56 [notice] 1#1: using the "epoll" event method
+2026/05/14 12:53:56 [notice] 1#1: nginx/1.31.0
+2026/05/14 12:53:56 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/05/14 12:53:56 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
+2026/05/14 12:53:56 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/05/14 12:53:56 [notice] 1#1: start worker processes
+2026/05/14 12:53:56 [notice] 1#1: start worker process 20
+2026/05/14 12:53:56 [notice] 1#1: start worker process 21
+2026/05/14 12:53:56 [notice] 1#1: start worker process 22
+2026/05/14 12:53:56 [notice] 1#1: start worker process 23
+2026/05/14 12:53:56 [notice] 1#1: start worker process 24
+2026/05/14 12:53:56 [notice] 1#1: start worker process 25
+2026/05/14 12:53:56 [notice] 1#1: start worker process 26
+2026/05/14 12:53:56 [notice] 1#1: start worker process 27
+2026/05/14 14:58:10 [notice] 1#1: using the "epoll" event method
+2026/05/14 14:58:10 [notice] 1#1: nginx/1.31.0
+2026/05/14 14:58:10 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/05/14 14:58:10 [notice] 1#1: OS: Linux 6.6.114.1-microsoft-standard-WSL2
+2026/05/14 14:58:10 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 14:36:41 [notice] 1#1: using the "epoll" event method
+2026/06/02 14:36:41 [notice] 1#1: nginx/1.31.1
+2026/06/02 14:36:41 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 14:36:41 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 14:36:41 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 14:36:41 [notice] 1#1: start worker processes
+2026/06/02 14:36:41 [notice] 1#1: start worker process 20
+2026/06/02 14:36:41 [notice] 1#1: start worker process 21
+2026/06/02 14:36:41 [notice] 1#1: start worker process 22
+2026/06/02 14:36:41 [notice] 1#1: start worker process 23
+2026/06/02 14:36:41 [notice] 1#1: start worker process 24
+2026/06/02 14:36:41 [notice] 1#1: start worker process 25
+2026/06/02 14:36:41 [notice] 1#1: start worker process 26
+2026/06/02 14:36:41 [notice] 1#1: start worker process 27
+2026/06/02 14:45:37 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026/06/02 14:45:37 [notice] 21#21: gracefully shutting down
+2026/06/02 14:45:37 [notice] 21#21: exiting
+2026/06/02 14:45:37 [notice] 20#20: gracefully shutting down
+2026/06/02 14:45:37 [notice] 23#23: gracefully shutting down
+2026/06/02 14:45:37 [notice] 24#24: gracefully shutting down
+2026/06/02 14:45:37 [notice] 24#24: exiting
+2026/06/02 14:45:37 [notice] 22#22: gracefully shutting down
+2026/06/02 14:45:37 [notice] 27#27: gracefully shutting down
+2026/06/02 14:45:37 [notice] 25#25: gracefully shutting down
+2026/06/02 14:45:37 [notice] 25#25: exiting
+2026/06/02 14:45:37 [notice] 21#21: exit
+2026/06/02 14:45:37 [notice] 26#26: gracefully shutting down
+2026/06/02 14:45:37 [notice] 20#20: exiting
+2026/06/02 14:45:37 [notice] 23#23: exiting
+2026/06/02 14:45:37 [notice] 23#23: exit
+2026/06/02 14:45:37 [notice] 24#24: exit
+2026/06/02 14:45:37 [notice] 22#22: exiting
+2026/06/02 14:45:37 [notice] 27#27: exiting
+2026/06/02 14:45:37 [notice] 25#25: exit
+2026/06/02 14:45:37 [notice] 26#26: exiting
+2026/06/02 14:45:37 [notice] 20#20: exit
+2026/06/02 14:45:37 [notice] 22#22: exit
+2026/06/02 14:45:37 [notice] 27#27: exit
+2026/06/02 14:45:37 [notice] 26#26: exit
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 21
+2026/06/02 14:45:37 [notice] 1#1: worker process 21 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: worker process 23 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 23
+2026/06/02 14:45:37 [notice] 1#1: worker process 24 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2026/06/02 14:45:37 [notice] 1#1: worker process 25 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2026/06/02 14:45:37 [notice] 1#1: worker process 20 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 22
+2026/06/02 14:45:37 [notice] 1#1: worker process 22 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 26
+2026/06/02 14:45:37 [notice] 1#1: worker process 26 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 14:45:37 [notice] 1#1: signal 17 (SIGCHLD) received from 27
+2026/06/02 14:45:37 [notice] 1#1: worker process 27 exited with code 0
+2026/06/02 14:45:37 [notice] 1#1: exit
+2026/06/02 15:04:53 [notice] 1#1: using the "epoll" event method
+2026/06/02 15:04:53 [notice] 1#1: nginx/1.31.1
+2026/06/02 15:04:53 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 15:04:53 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 15:04:53 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 15:04:53 [notice] 1#1: start worker processes
+2026/06/02 15:04:53 [notice] 1#1: start worker process 20
+2026/06/02 15:04:53 [notice] 1#1: start worker process 21
+2026/06/02 15:04:53 [notice] 1#1: start worker process 22
+2026/06/02 15:04:53 [notice] 1#1: start worker process 23
+2026/06/02 15:04:53 [notice] 1#1: start worker process 24
+2026/06/02 15:04:53 [notice] 1#1: start worker process 25
+2026/06/02 15:04:53 [notice] 1#1: start worker process 26
+2026/06/02 15:04:53 [notice] 1#1: start worker process 27
+2026/06/02 15:08:58 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026/06/02 15:08:58 [notice] 20#20: gracefully shutting down
+2026/06/02 15:08:58 [notice] 20#20: exiting
+2026/06/02 15:08:58 [notice] 21#21: gracefully shutting down
+2026/06/02 15:08:58 [notice] 23#23: gracefully shutting down
+2026/06/02 15:08:58 [notice] 24#24: gracefully shutting down
+2026/06/02 15:08:58 [notice] 25#25: gracefully shutting down
+2026/06/02 15:08:58 [notice] 26#26: gracefully shutting down
+2026/06/02 15:08:58 [notice] 26#26: exiting
+2026/06/02 15:08:58 [notice] 27#27: gracefully shutting down
+2026/06/02 15:08:58 [notice] 27#27: exiting
+2026/06/02 15:08:58 [notice] 22#22: gracefully shutting down
+2026/06/02 15:08:58 [notice] 21#21: exiting
+2026/06/02 15:08:58 [notice] 23#23: exiting
+2026/06/02 15:08:58 [notice] 20#20: exit
+2026/06/02 15:08:58 [notice] 24#24: exiting
+2026/06/02 15:08:58 [notice] 25#25: exiting
+2026/06/02 15:08:58 [notice] 26#26: exit
+2026/06/02 15:08:58 [notice] 27#27: exit
+2026/06/02 15:08:58 [notice] 22#22: exiting
+2026/06/02 15:08:58 [notice] 21#21: exit
+2026/06/02 15:08:58 [notice] 23#23: exit
+2026/06/02 15:08:58 [notice] 24#24: exit
+2026/06/02 15:08:58 [notice] 25#25: exit
+2026/06/02 15:08:58 [notice] 22#22: exit
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 27
+2026/06/02 15:08:58 [notice] 1#1: worker process 27 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 26
+2026/06/02 15:08:58 [notice] 1#1: worker process 21 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: worker process 20 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: worker process 23 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: worker process 26 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 21
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2026/06/02 15:08:58 [notice] 1#1: worker process 24 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 22
+2026/06/02 15:08:58 [notice] 1#1: worker process 22 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 15:08:58 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2026/06/02 15:08:58 [notice] 1#1: worker process 25 exited with code 0
+2026/06/02 15:08:58 [notice] 1#1: exit
+2026/06/02 15:35:35 [notice] 1#1: using the "epoll" event method
+2026/06/02 15:35:35 [notice] 1#1: nginx/1.31.1
+2026/06/02 15:35:35 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 15:35:35 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 15:35:35 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 15:35:35 [notice] 1#1: start worker processes
+2026/06/02 15:35:35 [notice] 1#1: start worker process 20
+2026/06/02 15:35:35 [notice] 1#1: start worker process 21
+2026/06/02 15:35:35 [notice] 1#1: start worker process 22
+2026/06/02 15:35:35 [notice] 1#1: start worker process 23
+2026/06/02 15:35:35 [notice] 1#1: start worker process 24
+2026/06/02 15:35:35 [notice] 1#1: start worker process 25
+2026/06/02 15:35:35 [notice] 1#1: start worker process 26
+2026/06/02 15:35:35 [notice] 1#1: start worker process 27
+2026/06/02 16:03:48 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026/06/02 16:03:48 [notice] 20#20: gracefully shutting down
+2026/06/02 16:03:48 [notice] 20#20: exiting
+2026/06/02 16:03:48 [notice] 24#24: gracefully shutting down
+2026/06/02 16:03:48 [notice] 20#20: exit
+2026/06/02 16:03:48 [notice] 23#23: gracefully shutting down
+2026/06/02 16:03:48 [notice] 22#22: gracefully shutting down
+2026/06/02 16:03:48 [notice] 25#25: gracefully shutting down
+2026/06/02 16:03:48 [notice] 25#25: exiting
+2026/06/02 16:03:48 [notice] 27#27: gracefully shutting down
+2026/06/02 16:03:48 [notice] 26#26: gracefully shutting down
+2026/06/02 16:03:48 [notice] 21#21: gracefully shutting down
+2026/06/02 16:03:48 [notice] 21#21: exiting
+2026/06/02 16:03:48 [notice] 24#24: exiting
+2026/06/02 16:03:48 [notice] 23#23: exiting
+2026/06/02 16:03:48 [notice] 22#22: exiting
+2026/06/02 16:03:48 [notice] 25#25: exit
+2026/06/02 16:03:48 [notice] 27#27: exiting
+2026/06/02 16:03:48 [notice] 26#26: exiting
+2026/06/02 16:03:48 [notice] 21#21: exit
+2026/06/02 16:03:48 [notice] 26#26: exit
+2026/06/02 16:03:48 [notice] 24#24: exit
+2026/06/02 16:03:48 [notice] 23#23: exit
+2026/06/02 16:03:48 [notice] 22#22: exit
+2026/06/02 16:03:48 [notice] 27#27: exit
+2026/06/02 16:03:48 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2026/06/02 16:03:48 [notice] 1#1: worker process 20 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 16:03:48 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2026/06/02 16:03:48 [notice] 1#1: worker process 25 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: worker process 26 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 16:03:48 [notice] 1#1: signal 17 (SIGCHLD) received from 23
+2026/06/02 16:03:48 [notice] 1#1: worker process 21 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: worker process 22 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: worker process 23 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: worker process 24 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 16:03:48 [notice] 1#1: signal 17 (SIGCHLD) received from 27
+2026/06/02 16:03:48 [notice] 1#1: worker process 27 exited with code 0
+2026/06/02 16:03:48 [notice] 1#1: exit
+2026/06/02 16:04:51 [notice] 1#1: using the "epoll" event method
+2026/06/02 16:04:51 [notice] 1#1: nginx/1.31.1
+2026/06/02 16:04:51 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 16:04:51 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 16:04:51 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 16:04:51 [notice] 1#1: start worker processes
+2026/06/02 16:04:51 [notice] 1#1: start worker process 21
+2026/06/02 16:04:51 [notice] 1#1: start worker process 22
+2026/06/02 16:04:51 [notice] 1#1: start worker process 23
+2026/06/02 16:04:51 [notice] 1#1: start worker process 24
+2026/06/02 16:04:51 [notice] 1#1: start worker process 25
+2026/06/02 16:04:51 [notice] 1#1: start worker process 26
+2026/06/02 16:04:51 [notice] 1#1: start worker process 27
+2026/06/02 16:04:51 [notice] 1#1: start worker process 28
+2026/06/02 16:40:16 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026/06/02 16:40:16 [notice] 26#26: gracefully shutting down
+2026/06/02 16:40:16 [notice] 22#22: gracefully shutting down
+2026/06/02 16:40:16 [notice] 23#23: gracefully shutting down
+2026/06/02 16:40:16 [notice] 24#24: gracefully shutting down
+2026/06/02 16:40:16 [notice] 21#21: gracefully shutting down
+2026/06/02 16:40:16 [notice] 25#25: gracefully shutting down
+2026/06/02 16:40:16 [notice] 27#27: gracefully shutting down
+2026/06/02 16:40:16 [notice] 28#28: gracefully shutting down
+2026/06/02 16:40:16 [notice] 26#26: exiting
+2026/06/02 16:40:16 [notice] 22#22: exiting
+2026/06/02 16:40:16 [notice] 23#23: exiting
+2026/06/02 16:40:16 [notice] 24#24: exiting
+2026/06/02 16:40:16 [notice] 21#21: exiting
+2026/06/02 16:40:16 [notice] 25#25: exiting
+2026/06/02 16:40:16 [notice] 27#27: exiting
+2026/06/02 16:40:16 [notice] 28#28: exiting
+2026/06/02 16:40:16 [notice] 27#27: exit
+2026/06/02 16:40:16 [notice] 22#22: exit
+2026/06/02 16:40:16 [notice] 26#26: exit
+2026/06/02 16:40:16 [notice] 23#23: exit
+2026/06/02 16:40:16 [notice] 24#24: exit
+2026/06/02 16:40:16 [notice] 21#21: exit
+2026/06/02 16:40:16 [notice] 25#25: exit
+2026/06/02 16:40:16 [notice] 28#28: exit
+2026/06/02 16:40:16 [notice] 1#1: signal 17 (SIGCHLD) received from 23
+2026/06/02 16:40:16 [notice] 1#1: worker process 21 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 22 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 23 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 26 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 27 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 28 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 16:40:16 [notice] 1#1: signal 17 (SIGCHLD) received from 26
+2026/06/02 16:40:16 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2026/06/02 16:40:16 [notice] 1#1: worker process 24 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: worker process 25 exited with code 0
+2026/06/02 16:40:16 [notice] 1#1: exit
+2026/06/02 16:40:17 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:18 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:19 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:20 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:21 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:23 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:27 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:34 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:12
+2026/06/02 16:40:48 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:10 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:11 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:12 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:13 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:14 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:16 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:20 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:27 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:41:40 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:42:06 [emerg] 1#1: unknown directive "modsecurity" in /etc/nginx/conf.d/default.conf:11
+2026/06/02 16:42:58 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:43:59 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:44:59 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:18 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:21 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:24 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:26 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:28 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:31 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:36 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:43 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:57:56 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:58:23 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 16:59:15 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 17:00:15 [emerg] 1#1: cannot load certificate "/etc/nginx/ssl/nginx.crt": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/nginx/ssl/nginx.crt, r) error:10000080:BIO routines::no such file)
+2026/06/02 17:00:31 [notice] 1#1: using the "epoll" event method
+2026/06/02 17:00:31 [notice] 1#1: nginx/1.31.1
+2026/06/02 17:00:31 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 17:00:31 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 17:00:31 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 17:00:31 [notice] 1#1: start worker processes
+2026/06/02 17:00:31 [notice] 1#1: start worker process 29
+2026/06/02 17:00:31 [notice] 1#1: start worker process 30
+2026/06/02 17:00:31 [notice] 1#1: start worker process 31
+2026/06/02 17:00:31 [notice] 1#1: start worker process 32
+2026/06/02 17:00:31 [notice] 1#1: start worker process 33
+2026/06/02 17:00:31 [notice] 1#1: start worker process 34
+2026/06/02 17:00:31 [notice] 1#1: start worker process 35
+2026/06/02 17:00:31 [notice] 1#1: start worker process 36
+2026/06/02 17:04:30 [error] 32#32: *6 "/etc/nginx/html/index.html" is not found (2: No such file or directory), client: 172.20.2.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2026/06/02 17:04:30 [error] 32#32: *6 open() "/etc/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.20.2.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "https://localhost/"
+2026/06/02 20:07:59 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026/06/02 20:07:59 [notice] 29#29: gracefully shutting down
+2026/06/02 20:07:59 [notice] 31#31: gracefully shutting down
+2026/06/02 20:07:59 [notice] 30#30: gracefully shutting down
+2026/06/02 20:07:59 [notice] 32#32: gracefully shutting down
+2026/06/02 20:07:59 [notice] 33#33: gracefully shutting down
+2026/06/02 20:07:59 [notice] 29#29: exiting
+2026/06/02 20:07:59 [notice] 34#34: gracefully shutting down
+2026/06/02 20:07:59 [notice] 35#35: gracefully shutting down
+2026/06/02 20:07:59 [notice] 36#36: gracefully shutting down
+2026/06/02 20:07:59 [notice] 31#31: exiting
+2026/06/02 20:07:59 [notice] 36#36: exiting
+2026/06/02 20:07:59 [notice] 30#30: exiting
+2026/06/02 20:07:59 [notice] 32#32: exiting
+2026/06/02 20:07:59 [notice] 33#33: exiting
+2026/06/02 20:07:59 [notice] 29#29: exit
+2026/06/02 20:07:59 [notice] 33#33: exit
+2026/06/02 20:07:59 [notice] 34#34: exiting
+2026/06/02 20:07:59 [notice] 35#35: exiting
+2026/06/02 20:07:59 [notice] 31#31: exit
+2026/06/02 20:07:59 [notice] 36#36: exit
+2026/06/02 20:07:59 [notice] 30#30: exit
+2026/06/02 20:07:59 [notice] 32#32: exit
+2026/06/02 20:07:59 [notice] 34#34: exit
+2026/06/02 20:07:59 [notice] 35#35: exit
+2026/06/02 20:07:59 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2026/06/02 20:07:59 [notice] 1#1: worker process 31 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 20:07:59 [notice] 1#1: signal 17 (SIGCHLD) received from 36
+2026/06/02 20:07:59 [notice] 1#1: worker process 36 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 20:07:59 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2026/06/02 20:07:59 [notice] 1#1: worker process 29 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: worker process 32 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: worker process 33 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: worker process 34 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: signal 29 (SIGIO) received
+2026/06/02 20:07:59 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2026/06/02 20:07:59 [notice] 1#1: worker process 30 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: worker process 35 exited with code 0
+2026/06/02 20:07:59 [notice] 1#1: exit
+2026/06/02 20:08:01 [notice] 1#1: using the "epoll" event method
+2026/06/02 20:08:01 [notice] 1#1: nginx/1.31.1
+2026/06/02 20:08:01 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 20:08:01 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 20:08:01 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 20:08:01 [notice] 1#1: start worker processes
+2026/06/02 20:08:01 [notice] 1#1: start worker process 29
+2026/06/02 20:08:01 [notice] 1#1: start worker process 30
+2026/06/02 20:08:01 [notice] 1#1: start worker process 31
+2026/06/02 20:08:01 [notice] 1#1: start worker process 32
+2026/06/02 20:08:01 [notice] 1#1: start worker process 33
+2026/06/02 20:08:01 [notice] 1#1: start worker process 34
+2026/06/02 20:08:01 [notice] 1#1: start worker process 35
+2026/06/02 20:08:01 [notice] 1#1: start worker process 36
+2026/06/02 20:30:49 [notice] 1#1: using the "epoll" event method
+2026/06/02 20:30:49 [notice] 1#1: nginx/1.31.1
+2026/06/02 20:30:49 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/02 20:30:49 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/02 20:30:49 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/02 20:30:49 [notice] 1#1: start worker processes
+2026/06/02 20:30:49 [notice] 1#1: start worker process 29
+2026/06/02 20:30:49 [notice] 1#1: start worker process 30
+2026/06/02 20:30:49 [notice] 1#1: start worker process 31
+2026/06/02 20:30:49 [notice] 1#1: start worker process 32
+2026/06/02 20:30:49 [notice] 1#1: start worker process 33
+2026/06/02 20:30:49 [notice] 1#1: start worker process 34
+2026/06/02 20:30:49 [notice] 1#1: start worker process 35
+2026/06/02 20:30:49 [notice] 1#1: start worker process 36
+2026/06/05 13:35:24 [notice] 1#1: using the "epoll" event method
+2026/06/05 13:35:24 [notice] 1#1: nginx/1.31.1
+2026/06/05 13:35:24 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/06/05 13:35:24 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2026/06/05 13:35:24 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/06/05 13:35:24 [notice] 1#1: start worker processes
+2026/06/05 13:35:24 [notice] 1#1: start worker process 29
+2026/06/05 13:35:24 [notice] 1#1: start worker process 30
+2026/06/05 13:35:24 [notice] 1#1: start worker process 31
+2026/06/05 13:35:24 [notice] 1#1: start worker process 32
+2026/06/05 13:35:24 [notice] 1#1: start worker process 33
+2026/06/05 13:35:24 [notice] 1#1: start worker process 34
+2026/06/05 13:35:24 [notice] 1#1: start worker process 35
+2026/06/05 13:35:24 [notice] 1#1: start worker process 36

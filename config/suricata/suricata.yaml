@@ -1,0 +1,47 @@
+%YAML 1.1
+---
+vars:
+  address-groups:
+    HOME_NET: "[172.20.0.0/16]"
+    EXTERNAL_NET: "!$HOME_NET"
+    HTTP_SERVERS: "$HOME_NET"
+    IOT_NET: "[172.20.5.0/24]"
+
+  port-groups:
+    HTTP_PORTS: "80"
+    HTTPS_PORTS: "443"
+    API_PORTS: "3000"
+
+default-log-dir: /var/log/suricata/
+
+outputs:
+  - fast:
+      enabled: yes
+      filename: fast.log
+  - eve-log:
+      enabled: yes
+      filename: eve.json
+      types:
+        - alert
+        - http
+        - dns
+        - flow
+
+af-packet:
+  - interface: eth0
+    threads: auto
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+
+default-rule-path: /etc/suricata/rules
+
+rule-files:
+  - ecotrack.rules
+
+app-layer:
+  protocols:
+    http:
+      enabled: yes
+    tls:
+      enabled: yes

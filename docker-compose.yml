@@ -1,0 +1,271 @@
+services:
+
+  # ── ZONE DMZ ──────────────────────────
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: eco-haproxy
+    ports:
+      - "8080:8080"
+      - "8404:8404"
+    networks:
+      - dmz
+      - backend
+    mem_limit: 64m
+    restart: unless-stopped
+    volumes:
+      - ./config/haproxy:/usr/local/etc/haproxy
+    depends_on:
+      - api
+
+  nginx-waf:
+    image: nginx:alpine
+    container_name: eco-nginx-waf
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - dmz
+      - backend
+    mem_limit: 128m
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/nginx/ssl:/etc/nginx/ssl
+      - ./config/nginx/html:/etc/nginx/html
+      - ./logs/nginx:/var/log/nginx
+
+  openvpn:
+    image: kylemanna/openvpn:latest
+    container_name: eco-openvpn
+    ports:
+      - "1194:1194/udp"
+    networks:
+      - dmz
+    mem_limit: 64m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./config/openvpn:/etc/openvpn
+
+  # ── ZONE BACKEND ──────────────────────
+  api:
+    image: node:20-alpine
+    container_name: eco-api
+    networks:
+      - backend
+      - db
+      - iot
+    mem_limit: 256m
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    command: sh -c "npm install && node server.js"
+    environment:
+      - DB_HOST=postgresql
+      - REDIS_HOST=redis
+      - PORT=3000
+
+  redis:
+    image: redis:7-alpine
+    container_name: eco-redis
+    networks:
+      - backend
+    mem_limit: 128m
+    restart: unless-stopped
+
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: eco-suricata
+    networks:
+      - dmz
+      - backend
+    mem_limit: 256m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./config/suricata:/etc/suricata
+      - ./logs/suricata:/var/log/suricata
+    command: -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal
+
+  # ── ZONE BASE DE DONNÉES ──────────────
+  postgresql:
+    image: postgis/postgis:15-3.3
+    container_name: eco-postgresql
+    networks:
+      - db
+    mem_limit: 512m
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=ecotrack
+      - POSTGRES_USER=ecotrack_user
+      - POSTGRES_PASSWORD=EcoTrack2026!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # ── ZONE IOT ──────────────────────────
+  simulateur-iot:
+    image: python:3.11-slim
+    container_name: eco-simulateur-iot
+    networks:
+      - iot
+    mem_limit: 128m
+    restart: unless-stopped
+    volumes:
+      - ./simulateur:/app
+    working_dir: /app
+    command: sh -c "pip install requests && python simulateur.py"
+
+  # ── ZONE MONITORING / SOC ─────────────
+  wazuh-manager:
+    image: wazuh/wazuh-manager:4.7.0
+    container_name: eco-wazuh-manager
+    networks:
+      - monitoring
+    mem_limit: 512m
+    restart: unless-stopped
+    volumes:
+      - wazuh_data:/var/ossec/data
+      - ./config/wazuh:/var/ossec/etc/rules
+
+  wazuh-indexer:
+    image: wazuh/wazuh-indexer:4.7.0
+    container_name: eco-wazuh-indexer
+    networks:
+      - monitoring
+    mem_limit: 1024m
+    restart: unless-stopped
+    environment:
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - wazuh_indexer_data:/var/lib/wazuh-indexer
+
+  wazuh-dashboard:
+    image: wazuh/wazuh-dashboard:4.7.0
+    container_name: eco-wazuh-dashboard
+    networks:
+      - monitoring
+    mem_limit: 512m
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    environment:
+      - INDEXER_URL=https://172.20.4.2:9200
+      - INDEXER_USERNAME=admin
+      - INDEXER_PASSWORD=admin
+      - DASHBOARD_USERNAME=kibanaserver
+      - DASHBOARD_PASSWORD=kibanaserver
+      - API_URL=https://172.20.4.2
+      - API_USERNAME=wazuh-wui
+      - API_PASSWORD=MyS3cr37P450r.*-
+    depends_on:
+      - wazuh-indexer
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: eco-prometheus
+    networks:
+      - monitoring
+    mem_limit: 256m
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: eco-grafana
+    networks:
+      - monitoring
+    mem_limit: 128m
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=EcoTrack2026!
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: eco-node-exporter
+    networks:
+      - monitoring
+    mem_limit: 64m
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: eco-alertmanager
+    networks:
+      - monitoring
+    mem_limit: 64m
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./config/alertmanager:/etc/alertmanager
+
+  # ── FIREWALL ──────────────────────────
+  firewall:
+    image: alpine:latest
+    container_name: eco-firewall
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./firewall.sh:/firewall.sh
+    command: sh -c "apk add --no-cache iptables && chmod +x /firewall.sh && /firewall.sh && tail -f /dev/null"
+    mem_limit: 64m
+    restart: unless-stopped
+
+networks:
+  dmz:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.1.0/24
+    name: ecotrack-dmz
+
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.2.0/24
+    name: ecotrack-backend
+
+  db:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.3.0/24
+    name: ecotrack-db
+
+  monitoring:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.4.0/24
+    name: ecotrack-monitoring
+
+  iot:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.5.0/24
+    name: ecotrack-iot
+
+volumes:
+  postgres_data:
+  wazuh_data:
+  wazuh_indexer_data:
+  prometheus_data:
+  grafana_data:

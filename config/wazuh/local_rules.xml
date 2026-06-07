@@ -1,0 +1,22 @@
+<group name="ecotrack,">
+  <rule id="100001" level="10">
+    <if_sid>5710</if_sid>
+    <description>ECOTRACK: Tentative acces SSH non autorise</description>
+  </rule>
+  <rule id="100002" level="12">
+    <if_sid>5712</if_sid>
+    <description>ECOTRACK: Bruteforce SSH detecte</description>
+  </rule>
+  <rule id="100003" level="10">
+    <match>ECOTRACK</match>
+    <description>ECOTRACK: Evenement securite detecte</description>
+  </rule>
+  <rule id="100004" level="8">
+    <match>nginx</match>
+    <description>ECOTRACK: Acces WAF Nginx detecte</description>
+  </rule>
+  <rule id="100005" level="12">
+    <match>suricata</match>
+    <description>ECOTRACK: Alerte IDS Suricata detectee</description>
+  </rule>
+</group>
