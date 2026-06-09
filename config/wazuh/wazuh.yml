@@ -1,0 +1,7 @@
+hosts:
+  - production:
+      url: https://eco-wazuh-manager
+      port: 55000
+      username: wazuh-wui
+      password: wazuh-wui
+      run_as: false

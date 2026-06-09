@@ -1,6 +1,5 @@
 services:
 
-  # ── ZONE DMZ ──────────────────────────
   haproxy:
     image: haproxy:2.8-alpine
     container_name: eco-haproxy
@@ -48,7 +47,6 @@ services:
     volumes:
       - ./config/openvpn:/etc/openvpn
 
-  # ── ZONE BACKEND ──────────────────────
   api:
     image: node:20-alpine
     container_name: eco-api
@@ -91,7 +89,6 @@ services:
       - ./logs/suricata:/var/log/suricata
     command: -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal
 
-  # ── ZONE BASE DE DONNÉES ──────────────
   postgresql:
     image: postgis/postgis:15-3.3
     container_name: eco-postgresql
@@ -106,7 +103,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # ── ZONE IOT ──────────────────────────
   simulateur-iot:
     image: python:3.11-slim
     container_name: eco-simulateur-iot
@@ -119,21 +115,10 @@ services:
     working_dir: /app
     command: sh -c "pip install requests && python simulateur.py"
 
-  # ── ZONE MONITORING / SOC ─────────────
-  wazuh-manager:
-    image: wazuh/wazuh-manager:4.7.0
-    container_name: eco-wazuh-manager
-    networks:
-      - monitoring
-    mem_limit: 512m
-    restart: unless-stopped
-    volumes:
-      - wazuh_data:/var/ossec/data
-      - ./config/wazuh:/var/ossec/etc/rules
-
   wazuh-indexer:
     image: wazuh/wazuh-indexer:4.7.0
     container_name: eco-wazuh-indexer
+    hostname: eco-wazuh-indexer
     networks:
       - monitoring
     mem_limit: 1024m
@@ -143,26 +128,35 @@ services:
     volumes:
       - wazuh_indexer_data:/var/lib/wazuh-indexer
 
+  wazuh-manager:
+    image: wazuh/wazuh-manager:4.7.0
+    container_name: eco-wazuh-manager
+    hostname: eco-wazuh-manager
+    networks:
+      - monitoring
+    mem_limit: 512m
+    restart: unless-stopped
+    volumes:
+      - ./config/wazuh/ossec.conf:/var/ossec/etc/ossec.conf
+      - wazuh_data:/var/ossec/data
+    depends_on:
+      - wazuh-indexer
+
   wazuh-dashboard:
     image: wazuh/wazuh-dashboard:4.7.0
     container_name: eco-wazuh-dashboard
+    hostname: eco-wazuh-dashboard
     networks:
       - monitoring
     mem_limit: 512m
     restart: unless-stopped
     ports:
       - "5601:5601"
-    environment:
-      - INDEXER_URL=https://172.20.4.2:9200
-      - INDEXER_USERNAME=admin
-      - INDEXER_PASSWORD=admin
-      - DASHBOARD_USERNAME=kibanaserver
-      - DASHBOARD_PASSWORD=kibanaserver
-      - API_URL=https://172.20.4.2
-      - API_USERNAME=wazuh-wui
-      - API_PASSWORD=MyS3cr37P450r.*-
+    volumes:
+      - ./config/wazuh/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
     depends_on:
       - wazuh-indexer
+      - wazuh-manager
 
   prometheus:
     image: prom/prometheus:latest
@@ -213,7 +207,6 @@ services:
     volumes:
       - ./config/alertmanager:/etc/alertmanager
 
-  # ── FIREWALL ──────────────────────────
   firewall:
     image: alpine:latest
     container_name: eco-firewall
@@ -234,28 +227,24 @@ networks:
       config:
         - subnet: 172.20.1.0/24
     name: ecotrack-dmz
-
   backend:
     driver: bridge
     ipam:
       config:
         - subnet: 172.20.2.0/24
     name: ecotrack-backend
-
   db:
     driver: bridge
     ipam:
       config:
         - subnet: 172.20.3.0/24
     name: ecotrack-db
-
   monitoring:
     driver: bridge
     ipam:
       config:
         - subnet: 172.20.4.0/24
     name: ecotrack-monitoring
-
   iot:
     driver: bridge
     ipam:
