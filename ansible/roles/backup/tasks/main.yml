@@ -1,0 +1,28 @@
+---
+- name: Creation dossier backups
+  file:
+    path: /backups/postgresql
+    state: directory
+    mode: '0755'
+
+- name: Copie script backup
+  copy:
+    src: /opt/ecotrack/scripts/backup_postgresql.sh
+    dest: /usr/local/bin/ecotrack-backup.sh
+    mode: '0755'
+    remote_src: yes
+
+- name: Copie script restore
+  copy:
+    src: /opt/ecotrack/scripts/restore_postgresql.sh
+    dest: /usr/local/bin/ecotrack-restore.sh
+    mode: '0755'
+    remote_src: yes
+
+- name: Cron sauvegarde automatique 02h00
+  cron:
+    name: "ECOTRACK backup PostgreSQL"
+    hour: "2"
+    minute: "0"
+    job: "/usr/local/bin/ecotrack-backup.sh >> /var/log/ecotrack_backup.log 2>&1"
+    state: present

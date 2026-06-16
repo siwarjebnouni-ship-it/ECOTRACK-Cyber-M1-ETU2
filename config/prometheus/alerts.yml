@@ -1,0 +1,49 @@
+groups:
+  - name: ECOTRACK-Alertes
+    interval: 1m
+    rules:
+
+      - alert: ECOTRACK_CPU_Eleve
+        expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU eleve sur ECOTRACK"
+          description: "CPU a {{ $value | printf \"%.1f\" }}%"
+
+      - alert: ECOTRACK_Disque_Plein
+        expr: (node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) / node_filesystem_size_bytes{mountpoint="/"} * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disque plein sur ECOTRACK"
+          description: "Disque a {{ $value | printf \"%.1f\" }}%"
+
+      - alert: ECOTRACK_Service_Down
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service ECOTRACK down"
+          description: "{{ $labels.instance }} ne repond plus"
+
+      - alert: ECOTRACK_Bruteforce_Detecte
+        expr: increase(node_network_receive_packets_total{device!="lo"}[5m]) > 10000
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Trafic anormal detecte"
+          description: "Plus de 10000 paquets en 5 minutes"
+
+      - alert: ECOTRACK_Capteur_Muet
+        expr: absent_over_time(up{job="node-exporter"}[15m])
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Node Exporter muet"
+          description: "Aucune metrique depuis 15 minutes"

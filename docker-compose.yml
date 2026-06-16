@@ -1,0 +1,343 @@
+services:
+
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: eco-haproxy
+    ports:
+      - "8080:8080"
+      - "8404:8404"
+    networks:
+      - dmz
+      - backend
+    mem_limit: 64m
+    restart: unless-stopped
+    volumes:
+      - ./config/haproxy:/usr/local/etc/haproxy
+    depends_on:
+      - api
+
+  nginx-waf:
+    image: owasp/modsecurity-crs:nginx-alpine
+    container_name: eco-nginx-waf
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - dmz
+      - backend
+    mem_limit: 128m
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/nginx/ssl:/etc/nginx/ssl
+      - ./config/nginx/html:/etc/nginx/html
+      - ./logs/nginx:/var/log/nginx
+
+  openvpn:
+    image: kylemanna/openvpn:latest
+    container_name: eco-openvpn
+    ports:
+      - "1194:1194/udp"
+    networks:
+      - dmz
+    mem_limit: 64m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./config/openvpn:/etc/openvpn
+
+  api:
+    image: node:20-alpine
+    container_name: eco-api
+    networks:
+      - backend
+      - db
+      - iot
+    mem_limit: 256m
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    command: sh -c "npm install && node server.js"
+    environment:
+      - DB_HOST=eco-postgresql
+      - DB_PORT=5432
+      - DB_NAME=ecotrack
+      - DB_USER=ecotrack_user
+      - DB_PASSWORD=EcoTrack2026!
+      - REDIS_HOST=eco-redis
+      - REDIS_PORT=6379
+      - PORT=3000
+
+  redis:
+    image: redis:7-alpine
+    container_name: eco-redis
+    networks:
+      - backend
+    mem_limit: 128m
+    restart: unless-stopped
+
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: eco-suricata
+    networks:
+      - dmz
+      - backend
+    mem_limit: 256m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./config/suricata:/etc/suricata
+      - ./logs/suricata:/var/log/suricata
+    command: -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal
+
+  postgresql:
+    image: postgis/postgis:15-3.3
+    container_name: eco-postgresql
+    networks:
+      - db
+    mem_limit: 512m
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=ecotrack
+      - POSTGRES_USER=ecotrack_user
+      - POSTGRES_PASSWORD=EcoTrack2026!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  simulateur-iot:
+    image: python:3.11-slim
+    container_name: eco-simulateur-iot
+    networks:
+      - iot
+    mem_limit: 128m
+    restart: unless-stopped
+    volumes:
+      - ./simulateur:/app
+    working_dir: /app
+    command: sh -c "pip install requests && python simulateur.py"
+
+  # ── Agent Wazuh — Monitoring de l'infrastructure ─────────────
+  wazuh-agent:
+    image: ubuntu:22.04
+    container_name: eco-wazuh-agent
+    hostname: eco-wazuh-agent
+    networks:
+      - monitoring
+      - backend
+    mem_limit: 256m
+    restart: unless-stopped
+    environment:
+      - WAZUH_MANAGER=eco-wazuh-manager
+      - WAZUH_AGENT_NAME=eco-infrastructure-monitor
+    command: >
+      bash -c "
+        apt-get update -qq &&
+        apt-get install -y wget curl gnupg2 lsb-release -qq &&
+        wget -q https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.7.0-1_amd64.deb -O /tmp/wazuh-agent.deb &&
+        apt --fix-broken install -y -qq &&
+        WAZUH_MANAGER='eco-wazuh-manager' WAZUH_AGENT_NAME='eco-infrastructure-monitor' dpkg -i /tmp/wazuh-agent.deb &&
+        apt --fix-broken install -y -qq &&
+        sed -i 's|MANAGER_IP|eco-wazuh-manager|g' /var/ossec/etc/ossec.conf &&
+        /var/ossec/bin/wazuh-control start &&
+        tail -f /var/ossec/logs/ossec.log
+      "
+    depends_on:
+      - wazuh-manager
+
+  wazuh-indexer:
+    image: wazuh/wazuh-indexer:4.7.0
+    container_name: eco-wazuh-indexer
+    hostname: eco-wazuh-indexer
+    networks:
+      - monitoring
+    mem_limit: 1024m
+    restart: unless-stopped
+    environment:
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - wazuh_indexer_data:/var/lib/wazuh-indexer
+
+  wazuh-manager:
+    image: wazuh/wazuh-manager:4.7.0
+    container_name: eco-wazuh-manager
+    hostname: eco-wazuh-manager
+    networks:
+      - monitoring
+    mem_limit: 512m
+    restart: unless-stopped
+    volumes:
+      - ./config/wazuh/ossec.conf:/var/ossec/etc/ossec.conf
+      - wazuh_data:/var/ossec/data
+    depends_on:
+      - wazuh-indexer
+
+  wazuh-dashboard:
+    image: wazuh/wazuh-dashboard:4.7.0
+    container_name: eco-wazuh-dashboard
+    hostname: eco-wazuh-dashboard
+    networks:
+      - monitoring
+    mem_limit: 512m
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./config/wazuh/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+    depends_on:
+      - wazuh-indexer
+      - wazuh-manager
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: eco-prometheus
+    networks:
+      - monitoring
+    mem_limit: 256m
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/alerts.yml:/etc/prometheus/alerts.yml
+      - ./config/prometheus/rules.yml:/etc/prometheus/rules.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: eco-grafana
+    networks:
+      - monitoring
+    mem_limit: 256m
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=EcoTrack2026!
+      - GF_UNIFIED_ALERTING_ENABLED=true
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: eco-node-exporter
+    networks:
+      - monitoring
+    mem_limit: 64m
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: eco-cadvisor
+    networks:
+      - monitoring
+    mem_limit: 128m
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    privileged: true
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: eco-postgres-exporter
+    networks:
+      - monitoring
+      - db
+    mem_limit: 64m
+    restart: unless-stopped
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://ecotrack_user:EcoTrack2026!@eco-postgresql:5432/ecotrack?sslmode=disable
+    depends_on:
+      - postgresql
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: eco-alertmanager
+    networks:
+      - monitoring
+    mem_limit: 64m
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./config/alertmanager:/etc/alertmanager
+
+  # Firewall desactive sur Windows — decommente sur Linux
+  # firewall:
+  #   image: alpine:latest
+  #   container_name: eco-firewall
+  #   network_mode: host
+  #   cap_add:
+  #     - NET_ADMIN
+  #     - NET_RAW
+  #   volumes:
+  #     - ./firewall.sh:/firewall.sh
+  #   command: sh -c "apk add --no-cache iptables && chmod +x /firewall.sh && /firewall.sh && tail -f /dev/null"
+  #   mem_limit: 64m
+  #   restart: unless-stopped
+
+networks:
+  dmz:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.1.0/24
+    name: ecotrack-dmz
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.2.0/24
+    name: ecotrack-backend
+  db:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.3.0/24
+    name: ecotrack-db
+  monitoring:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.4.0/24
+    name: ecotrack-monitoring
+  iot:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.5.0/24
+    name: ecotrack-iot
+
+volumes:
+  postgres_data:
+  wazuh_data:
+  wazuh_indexer_data:
+  prometheus_data:
+  grafana_data:

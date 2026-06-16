@@ -1,0 +1,49 @@
+# ─────────────────────────────────────────────────────────────────
+# ECOTRACK — Configuration DNS SPF et DMARC pour ecotrack.fr
+# Protection contre le phishing et l'usurpation de domaine
+# ─────────────────────────────────────────────────────────────────
+
+# ── ENREGISTREMENT SPF ───────────────────────────────────────────
+# Type : TXT
+# Nom  : ecotrack.fr
+# Valeur :
+v=spf1 ip4:172.20.1.0/24 -all
+
+# Explication :
+# v=spf1          → version SPF
+# ip4:172.20.1.0/24 → seuls les serveurs de notre zone DMZ
+#                     sont autorisés à envoyer des emails
+# -all            → tout autre serveur est REJETÉ
+
+# ── ENREGISTREMENT DMARC ─────────────────────────────────────────
+# Type : TXT
+# Nom  : _dmarc.ecotrack.fr
+# Valeur :
+v=DMARC1; p=reject; rua=mailto:security@ecotrack.fr; fo=1
+
+# Explication :
+# v=DMARC1        → version DMARC
+# p=reject        → les emails non conformes sont rejetés
+# rua=mailto:...  → rapports envoyés à l'équipe sécurité
+# fo=1            → rapport pour chaque échec SPF ou DKIM
+
+# ── ENREGISTREMENT DKIM ──────────────────────────────────────────
+# Type : TXT
+# Nom  : mail._domainkey.ecotrack.fr
+# Valeur :
+v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ...
+
+# ── DÉPLOIEMENT EN PRODUCTION (Azure DNS) ────────────────────────
+# Ces enregistrements seraient ajoutés dans Azure DNS :
+#
+# az network dns record-set txt add-record \
+#   --resource-group ecotrack-rg \
+#   --zone-name ecotrack.fr \
+#   --record-set-name "@" \
+#   --value "v=spf1 ip4:172.20.1.0/24 -all"
+#
+# az network dns record-set txt add-record \
+#   --resource-group ecotrack-rg \
+#   --zone-name ecotrack.fr \
+#   --record-set-name "_dmarc" \
+#   --value "v=DMARC1; p=reject; rua=mailto:security@ecotrack.fr; fo=1"

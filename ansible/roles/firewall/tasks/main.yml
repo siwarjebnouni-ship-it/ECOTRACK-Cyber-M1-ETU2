@@ -1,0 +1,38 @@
+---
+- name: Installation iptables-persistent
+  apt:
+    name: iptables-persistent
+    state: present
+
+- name: Copie du script firewall
+  copy:
+    src: "{{ project_dir }}/firewall.sh"
+    dest: /usr/local/bin/ecotrack-firewall.sh
+    mode: '0755'
+    remote_src: yes
+
+- name: Application des règles firewall
+  shell: bash /usr/local/bin/ecotrack-firewall.sh
+
+- name: Sauvegarde des règles iptables
+  shell: iptables-save > /etc/iptables/rules.v4
+
+- name: Service firewall au démarrage
+  copy:
+    dest: /etc/systemd/system/ecotrack-firewall.service
+    content: |
+      [Unit]
+      Description=ECOTRACK Firewall
+      After=network.target
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/bin/ecotrack-firewall.sh
+      RemainAfterExit=yes
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Activation service firewall
+  systemd:
+    name: ecotrack-firewall
+    enabled: yes
+    daemon_reload: yes

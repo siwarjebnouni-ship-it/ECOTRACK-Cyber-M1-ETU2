@@ -1,0 +1,86 @@
+{
+  "description": "ECOTRACK — Securite & Alertes",
+  "editable": true,
+  "graphTooltip": 1,
+  "id": null,
+  "panels": [
+    {
+      "gridPos": {"h": 2, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"content": "# 🔒 ECOTRACK — Tableau de Bord Sécurité\nSuivi alertes · Trafic réseau · État des services | Refresh 30s", "mode": "markdown"},
+      "title": "", "type": "text"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 1}]}, "mappings": [{"options": {"0": {"color": "green", "text": "Aucune ✅"}}, "type": "value"}]}},
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 2},
+      "id": 2,
+      "options": {"colorMode": "background", "graphMode": "none", "reduceOptions": {"calcs": ["lastNotNull"]}},
+      "title": "Services DOWN",
+      "type": "stat",
+      "targets": [{"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "count(up == 0) OR vector(0)", "legendFormat": "Services en panne", "refId": "A"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 80}, {"color": "red", "value": 95}]}, "unit": "percent", "max": 100, "min": 0}},
+      "gridPos": {"h": 5, "w": 6, "x": 6, "y": 2},
+      "id": 3,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"]}, "showThresholdMarkers": true},
+      "title": "CPU — Seuil alerte 80%",
+      "type": "gauge",
+      "targets": [{"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "100 - (avg(rate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)", "legendFormat": "CPU", "refId": "A"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 80}, {"color": "red", "value": 90}]}, "unit": "percent", "max": 100, "min": 0}},
+      "gridPos": {"h": 5, "w": 6, "x": 12, "y": 2},
+      "id": 4,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"]}, "showThresholdMarkers": true},
+      "title": "Disque — Seuil critique 90%",
+      "type": "gauge",
+      "targets": [{"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "(node_filesystem_size_bytes{mountpoint='/',fstype!='tmpfs'} - node_filesystem_free_bytes{mountpoint='/',fstype!='tmpfs'}) / node_filesystem_size_bytes{mountpoint='/',fstype!='tmpfs'} * 100", "legendFormat": "Disque", "refId": "A"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 70}, {"color": "red", "value": 85}]}, "unit": "percent", "max": 100, "min": 0}},
+      "gridPos": {"h": 5, "w": 6, "x": 18, "y": 2},
+      "id": 5,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"]}, "showThresholdMarkers": true},
+      "title": "RAM — Seuil alerte 70%",
+      "type": "gauge",
+      "targets": [{"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100", "legendFormat": "RAM", "refId": "A"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"unit": "pps", "color": {"mode": "palette-classic"}, "custom": {"lineWidth": 2, "fillOpacity": 15}}},
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 7},
+      "id": 6,
+      "options": {"legend": {"calcs": ["max", "mean"], "displayMode": "table", "placement": "bottom"}, "tooltip": {"mode": "multi"}},
+      "title": "Trafic réseau — Détection anomalies (seuil bruteforce > 10 000 paquets/5m)",
+      "type": "timeseries",
+      "targets": [
+        {"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "rate(node_network_receive_packets_total{device!='lo'}[1m])", "legendFormat": "RX {{device}}", "refId": "A"},
+        {"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "rate(node_network_transmit_packets_total{device!='lo'}[1m])", "legendFormat": "TX {{device}}", "refId": "B"}
+      ]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {"defaults": {"unit": "bytes", "color": {"mode": "palette-classic"}, "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 16},
+      "id": 7,
+      "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom"}},
+      "title": "Mémoire conteneurs ECOTRACK — Surveillance des limites",
+      "type": "timeseries",
+      "targets": [{"datasource": {"type": "prometheus", "uid": "${datasource}"}, "expr": "container_memory_usage_bytes{container_label_com_docker_compose_project='ecotrack-cyber-m1-etu2-main'}", "legendFormat": "{{name}}", "refId": "A"}]
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": ["ecotrack", "security"],
+  "templating": {"list": [{"current": {}, "hide": 0, "label": "Datasource", "name": "datasource", "query": "prometheus", "refresh": 1, "type": "datasource"}]},
+  "time": {"from": "now-3h", "to": "now"},
+  "timezone": "Europe/Paris",
+  "title": "ECOTRACK — Securite",
+  "uid": "ecotrack-security-v2",
+  "version": 1
+}

@@ -1,0 +1,13 @@
+---
+# ─────────────────────────────────────────────────────────────────
+# ECOTRACK — Playbook Ansible principal
+# Déploiement complet en une seule commande :
+#   ansible-playbook deploy.yml --limit production
+# ─────────────────────────────────────────────────────────────────
+- name: Déploiement ECOTRACK
+  hosts: all
+  become: yes
+  roles:
+    - docker
+    - firewall
+    - backup

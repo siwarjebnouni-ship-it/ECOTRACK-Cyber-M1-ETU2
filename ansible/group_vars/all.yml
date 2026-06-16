@@ -1,0 +1,12 @@
+---
+# Variables globales ECOTRACK
+project_name: ecotrack
+repo_url: https://github.com/siwarjebnouni-ship-it/ECOTRACK-Cyber-M1-ETU2
+project_dir: /opt/ecotrack
+backup_dir: /backups/postgresql
+backup_retention_days: 7
+backup_cron_hour: 2
+backup_cron_minute: 0
+db_name: ecotrack
+db_user: ecotrack_user
+db_password: EcoTrack2026!

@@ -1,0 +1,59 @@
+---
+# Rôle Docker — Installe Docker et déploie ECOTRACK
+
+- name: Mise à jour des paquets
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Installation des dépendances Docker
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - git
+    state: present
+
+- name: Ajout clé GPG Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Ajout dépôt Docker
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Installation Docker Engine
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+    state: present
+
+- name: Démarrage service Docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Clonage du projet ECOTRACK
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ project_dir }}"
+    force: yes
+
+- name: Rendre les scripts exécutables
+  file:
+    path: "{{ project_dir }}/scripts"
+    mode: '0755'
+    recurse: yes
+
+- name: Lancement de la stack ECOTRACK
+  shell: docker compose up -d
+  args:
+    chdir: "{{ project_dir }}"

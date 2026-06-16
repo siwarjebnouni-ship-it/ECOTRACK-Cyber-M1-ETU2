@@ -1,0 +1,58 @@
+groups:
+  - name: ECOTRACK-Alertes
+    rules:
+
+      # Règle 1 — Service arrêté
+      - alert: ECOTRACK_Service_Down
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: ecotrack
+        annotations:
+          summary: "Service ECOTRACK arrêté : {{ $labels.job }}"
+          description: "Le service {{ $labels.instance }} est DOWN depuis 1 minute — impact direct sur les capteurs IoT"
+
+      # Règle 2 — CPU élevé
+      - alert: ECOTRACK_CPU_Eleve
+        expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 2m
+        labels:
+          severity: warning
+          team: ecotrack
+        annotations:
+          summary: "CPU élevé sur ECOTRACK"
+          description: "CPU à {{ $value | printf \"%.1f\" }}% depuis 2 minutes — risque de ralentissement des transmissions capteurs"
+
+      # Règle 3 — RAM élevée
+      - alert: ECOTRACK_RAM_Elevee
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+          team: ecotrack
+        annotations:
+          summary: "RAM élevée sur ECOTRACK"
+          description: "RAM à {{ $value | printf \"%.1f\" }}% — Wazuh Indexer consomme beaucoup de mémoire"
+
+      # Règle 4 — Trafic réseau anormal (bruteforce)
+      - alert: ECOTRACK_Trafic_Anormal
+        expr: increase(node_network_receive_packets_total{device!="lo"}[5m]) > 10000
+        for: 0m
+        labels:
+          severity: warning
+          team: ecotrack
+        annotations:
+          summary: "Trafic réseau anormal détecté"
+          description: "Plus de 10000 paquets en 5 minutes — possible bruteforce ou capteur IoT compromis"
+
+      # Règle 5 — Capteurs silencieux
+      - alert: ECOTRACK_Capteurs_Silencieux
+        expr: absent_over_time(up{job="node-exporter"}[30m])
+        for: 0m
+        labels:
+          severity: warning
+          team: ecotrack
+        annotations:
+          summary: "Capteurs IoT silencieux depuis 30 minutes"
+          description: "Aucune donnée IoT reçue — la ville perd la visibilité sur les bacs de collecte"

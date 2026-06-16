@@ -1,0 +1,252 @@
+[
+    {
+        "Id": "819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82",
+        "Created": "2026-06-12T13:40:44.613223793Z",
+        "Path": "/run.sh",
+        "Args": [],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 20698,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-06-12T13:40:48.112191696Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:2d1f9ae67c1778d33e291d4c3c759cd8b650e67491f02533499eb950e075eeb5",
+        "ResolvConfPath": "/var/lib/docker/containers/819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82/hostname",
+        "HostsPath": "/var/lib/docker/containers/819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82/hosts",
+        "LogPath": "/var/lib/docker/containers/819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82/819765f7538a05a78d5ff10a4d6f482aff4de8b5ecb362ac475c7916f8039d82-json.log",
+        "Name": "/eco-grafana",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "ecotrack-cyber-m1-etu2-main_grafana_data:/var/lib/grafana:rw"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "ecotrack-monitoring",
+            "PortBindings": {
+                "3000/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "3000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 134217728,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 268435456,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "ecotrack-cyber-m1-etu2-main_grafana_data",
+                "Source": "/var/lib/docker/volumes/ecotrack-cyber-m1-etu2-main_grafana_data/_data",
+                "Destination": "/var/lib/grafana",
+                "Driver": "local",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "819765f7538a",
+            "Domainname": "",
+            "User": "472",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "3000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "GF_SECURITY_ADMIN_PASSWORD=EcoTrack2026!",
+                "PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GF_PATHS_CONFIG=/etc/grafana/grafana.ini",
+                "GF_PATHS_DATA=/var/lib/grafana",
+                "GF_PATHS_HOME=/usr/share/grafana",
+                "GF_PATHS_LOGS=/var/log/grafana",
+                "GF_PATHS_PLUGINS=/var/lib/grafana/plugins",
+                "GF_PATHS_PROVISIONING=/etc/grafana/provisioning"
+            ],
+            "Cmd": null,
+            "Image": "grafana/grafana:latest",
+            "Volumes": null,
+            "WorkingDir": "/usr/share/grafana",
+            "Entrypoint": [
+                "/run.sh"
+            ],
+            "Labels": {
+                "com.docker.compose.config-hash": "09a73599c5e1f7bda63a2737a19abd09da10685337f47ddbc17853fc5b043c76",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:2d1f9ae67c1778d33e291d4c3c759cd8b650e67491f02533499eb950e075eeb5",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "ecotrack-cyber-m1-etu2-main",
+                "com.docker.compose.project.config_files": "C:\\Users\\PC\\Downloads\\ECOTRACK-Cyber-M1-ETU2-main (1)\\ECOTRACK-Cyber-M1-ETU2-main\\docker-compose.yml",
+                "com.docker.compose.project.working_dir": "C:\\Users\\PC\\Downloads\\ECOTRACK-Cyber-M1-ETU2-main (1)\\ECOTRACK-Cyber-M1-ETU2-main",
+                "com.docker.compose.service": "grafana",
+                "com.docker.compose.version": "5.1.4",
+                "maintainer": "Grafana Labs \u003chello@grafana.com\u003e",
+                "org.opencontainers.image.source": "https://github.com/grafana/grafana"
+            },
+            "StopTimeout": 1
+        },
+        "NetworkSettings": {
+            "SandboxID": "29b5a1c97681cb7cc8d797da827598a1c15508cee0cc0aee308d40db5ff0d76e",
+            "SandboxKey": "/var/run/docker/netns/29b5a1c97681",
+            "Ports": {
+                "3000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "3000"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "3000"
+                    }
+                ]
+            },
+            "Networks": {
+                "ecotrack-monitoring": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "eco-grafana",
+                        "grafana"
+                    ],
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "3f192fb04fa54a68c65614648f952ce0a7b9e597719862c028f23f4e76388211",
+                    "EndpointID": "7baef374ce630167acdbcd145bc619967f075d4156d9598a170d8ecc08338a3a",
+                    "Gateway": "172.20.4.1",
+                    "IPAddress": "172.20.4.6",
+                    "MacAddress": "4a:20:15:25:0a:bd",
+                    "IPPrefixLen": 24,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": [
+                        "eco-grafana",
+                        "grafana",
+                        "819765f7538a"
+                    ]
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "digest": "sha256:135f4b96b7a54f904415dc51e71a1cd945b1f8400772b2feac2df5112b43f4ed",
+            "size": 3043,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ECOTRACK — Plateforme IoT Sécurisée</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0f1e;
+            color: #e0e6f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo { font-size: 3rem; margin-bottom: 10px; }
+        h1 { font-size: 2.5rem; color: #00d4aa; margin-bottom: 10px; }
+        .subtitle { color: #8892a4; margin-bottom: 40px; font-size: 1.1rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            width: 90%;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: #111827;
+            border: 1px solid #1f2d3d;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .card:hover { border-color: #00d4aa; }
+        .card .icon { font-size: 2rem; margin-bottom: 12px; }
+        .card h3 { color: #00d4aa; margin-bottom: 8px; }
+        .card p { color: #8892a4; font-size: 0.9rem; }
+        .status {
+            display: flex;
+            gap: 30px;
+            background: #111827;
+            border-radius: 12px;
+            padding: 20px 40px;
+            border: 1px solid #1f2d3d;
+        }
+        .status-item { text-align: center; }
+        .status-item .value { font-size: 1.8rem; color: #00d4aa; font-weight: bold; }
+        .status-item .label { color: #8892a4; font-size: 0.85rem; }
+        .badge {
+            display: inline-block;
+            background: #00d4aa22;
+            color: #00d4aa;
+            border: 1px solid #00d4aa44;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">🌿</div>
+    <h1>ECOTRACK</h1>
+    <p class="subtitle">Plateforme de monitoring IoT — Gestion intelligente des déchets urbains</p>
+    <div class="badge">✅ Système opérationnel — M1 Cyber-Réseaux INGETIS 2026</div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="icon">📡</div>
+            <h3>Capteurs IoT</h3>
+            <p>2000 capteurs actifs sur 12 zones géographiques</p>
+        </div>
+        <div class="card">
+            <div class="icon">🛡️</div>
+            <h3>Sécurité</h3>
+            <p>WAF Nginx + Suricata IDS + Firewall iptables</p>
+        </div>
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Monitoring</h3>
+            <p>Prometheus + Grafana + Wazuh SIEM</p>
+        </div>
+        <div class="card">
+            <div class="icon">🔒</div>
+            <h3>VPN</h3>
+            <p>OpenVPN PKI — Accès administrateur sécurisé</p>
+        </div>
+        <div class="card">
+            <div class="icon">🗄️</div>
+            <h3>Base de données</h3>
+            <p>PostgreSQL + PostGIS — Données géolocalisées</p>
+        </div>
+        <div class="card">
+            <div class="icon">🌐</div>
+            <h3>Architecture</h3>
+            <p>5 zones Docker isolées — DMZ, Backend, BDD, IoT, Monitoring</p>
+        </div>
+    </div>
+
+    <div class="status">
+        <div class="status-item">
+            <div class="value">2000</div>
+            <div class="label">Capteurs actifs</div>
+        </div>
+        <div class="status-item">
+            <div class="value">5</div>
+            <div class="label">Zones réseau</div>
+        </div>
+        <div class="status-item">
+            <div class="value">15</div>
+            <div class="label">Règles firewall</div>
+        </div>
+        <div class="status-item">
+            <div class="value">15</div>
+            <div class="label">Conteneurs</div>
+        </div>
+    </div>
+</body>
+</html>
